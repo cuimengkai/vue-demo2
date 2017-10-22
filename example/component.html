@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>component</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <p><span>何为组件?<br>
+    其实组件即使制作自定义的标签,这是在Html中没有的.</span></p>
+    <hr>
+    <p><span>全局化注册组件: 就是在构造器的外部使用Vue.component来注册的组件<br>
+        我们在js中注册的组件(Vue构造器之外),在Html中调用，并且可以将它放到多个构造器的作用域中
+    </span></p>
+    <div id="app">
+        <hello></hello>
+    </div>
+    <div id="vm">
+        <hello></hello>
+    </div>
+    <hr>
+    <p><span>局部化注册组件: 就是在构造器的内部来注册的组件<br>
+        局部注册的组件只能在注册组件的作用域中使用,其它作用域中无法使用<br>
+        需要注意的是局部注册组件,构造器中的是component是加s的 为components
+    </span></p>
+    <div id="id">
+        <vue></vue>
+    </div>
+    <hr>
+    <p><span>
+        那么组件和指令是啥区别呢?<br>
+        组件注册的是一个自定义的标签,而指令注册的是已有标签的属性.
+    </span></p>
+    <script type="text/javascript">
+    Vue.component("hello", {
+        template: `<div style = "color:red;"> 全局化注册的Vue组件 </div>`
+    });
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        }
+    });
+    var vm = new Vue({
+        el: "#vm",
+        data: {
+
+        }
+    });
+    var vm = new Vue({
+        el: "#id",
+        data: {
+
+        },
+        components: {
+            "vue": {
+                template: `<div style = "color:red;"> 局部注册的Vue组件 </div>`
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

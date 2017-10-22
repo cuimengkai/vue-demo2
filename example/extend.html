@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>extend</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <span>
+            Vue.extend返回一个扩展实例构造器,也就是预设了部分现象的Vue实例构造器.经常用于Vue.component用来生成组件,可以简单理解为在模版中遇到该组件作为标签的自定义元素时,会自动调用该扩展实例构造器来生产组件实例,并且挂载到自定义元素上.
+
+        </span>
+    <cmk></cmk>
+    <p><span>
+        还可以通过Html标签的id或者class等来生成扩展实例构造器,Vue.extend里的代码是一样的,只是在挂载的时候,使用类似选择器的方式挂载即可.推荐该模式使用.
+    </span></p>
+    <span id="cmk"></span>
+    <script type="text/javascript">
+    var cmkExtend = Vue.extend({
+        template: '<p><a v-bind:href="googleUrl" v-text="go"></a></p>',
+        data: function() {
+            return {
+                go: "open Google",
+                googleUrl: "https://www.google.com.hk/"
+            }
+        }
+    });
+    new cmkExtend().$mount("cmk");
+    new cmkExtend().$mount("#cmk");
+    </script>
+</body>
+
+</html>

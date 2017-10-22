@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>directive</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <span>
+        使用Vue.directive定义自己的指令
+    </span>
+    <p><span>
+        此处是使用Vue.directive自定义一个叫v-color的指令(需要注意的没有添加"v-"因为vue自动给添加上了,然后添加一个匿名函数作为第二个参数,vue会传入三个参数以供使用,第一个参数就是自定义指令所在的DOM元素,第二个参数binding是一个对象,是指令描述对象,其中包含指令名称,指令值,指令表达式等常用属性)
+        自定义指令还包含五个生命周期钩子,常用的是4个.
+        需要注意的是:unbind钩子 需要在vue作用域外面来调用.
+    </span></p>
+    <hr>
+    <div id="app">
+        <span v-text="number" v-color="color"></span>
+        <br>
+        <button v-on:click="add">➕</button>
+    </div>
+    <button onclick="unbind()">解绑</button>
+    <script type="text/javascript">
+    function unbind() {
+        vm.$destroy();
+    }
+    Vue.directive("color", {
+        bind: function(el, binding) { //被绑定
+            console.log('1-指令第一次绑定到元素时调用，用这个钩子函数可以定义一个绑定时执行一次的初始化动作');
+            el.style = "color:" + binding.value;
+        },
+        inserted: function() { //绑定到节点
+            console.log('2-被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于document中）');
+        },
+        update: function() { //组件更新
+            console.log('3-被绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新');
+        },
+        componentUpdated: function() { //组件更新完成
+            console.log('4-被绑定元素所在模板完成一次更新周期时调用');
+        },
+        unbind: function() { //解绑
+            console.log('5-指令与元素解绑时调用');
+        }
+    });
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            number: 10,
+            color: "red"
+
+        },
+        methods: {
+            add: function() {
+                return this.number++;
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

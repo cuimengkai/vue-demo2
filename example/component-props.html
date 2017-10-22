@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>component-props</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <p><span>
+        props,有啥用处?<br>
+        props选项就是在标签上设置属性并且获取属性值,<br
+        >就像我们注册一个hello组件(标签),该组件有一个name="Vue"我们如何获取呢?
+    </span></p>
+    <hr>
+    <p><span>注册一个vue组件,并使用props设置好组件的属性,然后就可以通过属性获取属性值了.</span></p>
+    <p><span style="color: red">
+        需要注意的是如果属性中包含"hello-vue" 那么在props中注册的时候,必须采用驼峰命名的规范也就是去除"-" 使用helloVue
+    </span></p>
+    <div id="app">
+        <vue hello="Hello" vue="Vue" hello-vue="hello vue"></vue>
+        <hr>
+        <span>如何将构造器data中的数据传递给组件呢？<br>
+            将注册的组件当作普通标签使用v-bind:k='v'来使用
+        </span>
+        <vue hello="Hello" v-bind:vue="message"></vue>
+    </div>
+    <script type="text/javascript">
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'cuimengkai'
+        },
+        components: {
+            "vue": {
+                template: `<div style="color:red;">{{hello}}---{{vue}}---{{helloVue}}</div>`,
+                props: ["hello", "vue", "helloVue"]
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

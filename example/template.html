@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>template</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <p><span>Vue中 template 模版的三种常见写法</span></p>
+    <hr>
+    <div id="app"></div>
+    <div id="vm"></div>
+    <div id="template"></div>
+    <hr>
+    <p><span>
+        然而在vue-cli中还有一种写template的方式,就是以xxx.vue为扩展名的文件
+    </span></p>
+    <template id="templat">
+        <h2 style="color: #00FFFF">使用teplate标签创建模版</h2>
+    </template>
+    <script type="x-template" id="templateInScript">
+        <h2 style="color: #C0C0C0">写在script标签中的模版</h2>
+    </script>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        template: '<h1 style="color:red">构造器中定义的template模版</h1>'
+
+
+    });
+    var vm = new Vue({
+        el: '#vm',
+        data: {
+            message: 'Hello Vue!'
+        },
+        template: '#templat'
+
+    });
+    var vm = new Vue({
+        el: '#template',
+        data: {
+            message: 'Hello Vue!'
+        },
+        template: '#templateInScript'
+
+    });
+    </script>
+</body>
+
+</html>

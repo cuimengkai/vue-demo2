@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>set</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <p><span>
+        Vue.set的作用就是在Vue构造器外面操作构造器内部的数据,属性,或者方法.比如:我们在构在器内部定义一个count的属性属性值为10,我们在构造器外部就可以通过Vue.set实现,点击按钮加1的操作.从构造器外部操作数据可以使得程序更加灵活.
+        <ul>
+            <li>直接操作外部数据</li>
+            <li>Vue.set接口实现</li>
+            <li>Vue的实例对象来操作</li>
+        </ul>
+    </span></p>
+    <hr>
+    <div id="app">
+        <span v-text="count"></span>
+    </div>
+    <button onclick="add()">➕</button>
+    <hr>
+    <div id="arr">
+        <ul>
+            <li v-for="arr in arrs" v-text="arr.name" v-bind:value="arr.num"></li>
+        </ul>
+        <ul>
+            <li v-for="(num,index) in nums" v-text="num" v-bind:value="index"></li>
+        </ul>
+    </div>
+    <button onclick="editArr()">修改外部数组</button>
+    <script type="text/javascript">
+    var outData = {
+        count: 10,
+        text: "外部数据"
+    }
+    var vm = new Vue({
+        el: "#app",
+        data: outData
+    });
+
+    function add() {
+        //outData.count++;
+        //Vue.set(outData, "count", 4)
+        vm.count++;
+    }
+    var outArr = {
+        arrs: [
+            { name: "Java", num: 3 },
+            { name: "Python", num: 1 },
+            { name: "Node", num: 5 }
+        ],
+        nums: [
+            "田野", "今麦郎", "康师傅"
+        ]
+    }
+    var arr = new Vue({
+        el: "#arr",
+        data: outArr
+    });
+
+    function editArr() {
+        arr.arrs[0]["name"] = "C#";
+        //arr.nums[0] = "哇哈哈";
+        //outArr.nums[0] = "哇哈哈";
+        outArr.nums.push("哇哈哈");
+        //Vue.set(arr.nums, 0, "哇哈哈");
+    }
+    </script>
+</body>
+
+</html>
